@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <welcome-file-list>
+        <welcome-file>
+            homePage.jsp
+        </welcome-file>
+    </welcome-file-list>
+    <servlet>
+        <servlet-name>readfile</servlet-name>
+        <servlet-class>readfile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>unpacktext</servlet-name>
+        <servlet-class>unpacktext</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>readF</servlet-name>
+        <servlet-class>readF</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>readfile</servlet-name>
+        <url-pattern>/readfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>unpacktext</servlet-name>
+        <url-pattern>/unpacktext</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>readF</servlet-name>
+        <url-pattern>/readF</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
