@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="lib">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/build/web/WEB-INF/lib/crimson-1.1.3.jar!/" />
-      <root url="jar://$PROJECT_DIR$/build/web/WEB-INF/lib/jpos.jar!/" />
+      <root url="jar://$USER_HOME$/Documents/crimson-1.1.3.jar!/" />
+      <root url="jar://$USER_HOME$/Documents/jpos.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -1,0 +1,43 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="ReadISOmessage:war exploded">
+    <output-path>$PROJECT_DIR$/target/ReadISOmessage-1.0-SNAPSHOT</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>ReadISOmessage</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="ReadISOmessage" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.jpos:jpos:2.1.5" />
+          <element id="library" level="project" name="Maven: org.jdom:jdom2:2.0.6" />
+          <element id="library" level="project" name="Maven: org.javatuples:javatuples:1.2" />
+          <element id="library" level="project" name="Maven: org.jline:jline:3.17.1" />
+          <element id="library" level="project" name="Maven: org.apache-extras.beanshell:bsh:2.0b6" />
+          <element id="library" level="project" name="Maven: commons-cli:commons-cli:1.4" />
+          <element id="library" level="project" name="Maven: org.bouncycastle:bcprov-jdk15on:1.67" />
+          <element id="library" level="project" name="Maven: org.bouncycastle:bcpg-jdk15on:1.67" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.30" />
+          <element id="library" level="project" name="Maven: org.hdrhistogram:HdrHistogram:2.1.12" />
+          <element id="library" level="project" name="Maven: org.osgi:org.osgi.core:6.0.0" />
+          <element id="library" level="project" name="Maven: org.javassist:javassist:3.27.0-GA" />
+          <element id="library" level="project" name="Maven: org.yaml:snakeyaml:1.26" />
+          <element id="library" level="project" name="Maven: jdbm:jdbm:1.0" />
+          <element id="library" level="project" name="Maven: com.sleepycat:je:18.3.12" />
+          <element id="library" level="project" name="Maven: org.apache.sshd:sshd-core:2.4.0" />
+          <element id="library" level="project" name="Maven: org.apache.sshd:sshd-common:2.4.0" />
+          <element id="library" level="project" name="Maven: net.i2p.crypto:eddsa:0.3.0" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/ReadISOmessage-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="ReadISOmessage/web/Web" />
+    </root>
+  </artifact>
+</component>
