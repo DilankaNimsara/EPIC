@@ -24,7 +24,7 @@ import java.util.stream.Stream;
 public class readF extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String path = "C:\\Users\\ASUS\\IdeaProjects\\ReadISOmessage\\src\\main\\java\\message\\isomessage.txt";
+        String path = "C:\\Users\\dilanka_a\\Desktop\\EPIC\\ReadISOmessage\\src\\main\\java\\message\\isomessage.txt";
         for (Part part : request.getParts()) {
             part.write(path);
         }
@@ -33,7 +33,7 @@ public class readF extends HttpServlet {
             try (Stream<String> lines = Files.lines(Paths.get(path))) {
                 String content = lines.collect(Collectors.joining(System.lineSeparator()));
                 String message = content.replaceAll("\\s", "");
-                ISOPackager packager = new GenericPackager("C:\\Users\\ASUS\\IdeaProjects\\ReadISOmessage\\src\\main\\java\\XmlFiles\\iso8583binary.xml");
+                ISOPackager packager = new GenericPackager("C:\\Users\\dilanka_a\\Desktop\\EPIC\\ReadISOmessage\\src\\main\\java\\XmlFiles\\iso8583binary.xml");
                 ISOMsg imMsg = new ISOMsg();
                 imMsg.setPackager(packager);
                 imMsg.unpack(ISOUtil.hex2byte(message));

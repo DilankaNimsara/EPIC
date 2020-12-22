@@ -15,7 +15,7 @@ public class Client {
                 dataOutputStream.writeUTF(str);
                 dataOutputStream.flush();
                 str2 = dataInputStream.readUTF();
-                System.out.printf("Server says : " + str2);
+                System.out.printf("DServer says : " + str2);
 
             }
 

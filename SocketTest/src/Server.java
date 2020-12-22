@@ -20,7 +20,7 @@ public class Server {
             while (!str.equals("stop")) {
 
                 str = dataInputStream.readUTF();
-                System.out.println("Client says : " + str);
+                System.out.println("DClient says : " + str);
                 str2 = bufferedReader.readLine();
                 dataOutputStream.writeUTF(str2);
                 dataOutputStream.flush();

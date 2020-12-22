@@ -27,7 +27,7 @@ public class unpacktext extends HttpServlet {
 
         try {
             out.println("Message : " + message);
-            ISOPackager packager = new GenericPackager("C:\\Users\\ASUS\\IdeaProjects\\ReadISOmessage\\src\\main\\java\\XmlFiles\\iso8583binary.xml");
+            ISOPackager packager = new GenericPackager("C:\\Users\\dilanka_a\\Desktop\\EPIC\\ReadISOmessage\\src\\main\\java\\XmlFiles\\iso8583binary.xml");
             ISOMsg imMsg = new ISOMsg();
             imMsg.setPackager(packager);
             imMsg.unpack(ISOUtil.hex2byte(message));
