@@ -5,6 +5,7 @@ import com.dilanka_a.springbootmysql.repositary.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -44,6 +45,10 @@ public class ProductService {
         existingProduct.setQuantity(newProduct.getQuantity());
         existingProduct.setPrice(newProduct.getPrice());
         return repository.save(existingProduct);
+    }
+
+    public Collection<product> getProductNameSAME(String name) {
+        return repository.findAllActiveProducts(name);
     }
 
 }

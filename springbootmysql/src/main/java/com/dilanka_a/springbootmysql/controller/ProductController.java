@@ -2,10 +2,10 @@ package com.dilanka_a.springbootmysql.controller;
 
 import com.dilanka_a.springbootmysql.entity.product;
 import com.dilanka_a.springbootmysql.service.ProductService;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -29,13 +29,13 @@ public class ProductController {
         return productService.getProducts();
     }
 
-    @GetMapping("/product/{id}")
-    public product findProductByID(@PathVariable("id") int id) {
+    @GetMapping("/productbyid/{id}")
+    public product findProductByID(@PathVariable int id) {
         return productService.getProductByid(id);
     }
 
     @GetMapping("/product/{name}")
-    public product findProductByName(@PathVariable("name") String name) {
+    public product findProductByName(@PathVariable String name) {
         return productService.getProductName(name);
     }
 
@@ -45,8 +45,14 @@ public class ProductController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public product deleteProductByID(@PathVariable("id") int id) {
-        return productService.getProductByid(id);
+    public String deleteProductByID(@PathVariable int id) {
+        return productService.deleteProduct(id);
     }
+
+    @GetMapping("/productsame/{name}")
+    public Collection<product> findProductByNamesame(@PathVariable String name) {
+        return productService.getProductNameSAME(name);
+    }
+
 
 }
