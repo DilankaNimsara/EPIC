@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <form id="formDa">
+        <input id="userId" placeholder="ID" type="text"><br>
+        <input id="userName" placeholder="Name" type="text"><br>
+        <input id="userAddress" placeholder="Address" type="text"><br>
+        <button id="btnSave" type="button">Save</button>
+    </form>
+    <br>
+    <br>
+    <button id="btnGetData" type="button">Get Data</button>
+    <br>
+    <br>
+    <table border="1" width="25%">
+        <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Address</th>
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+    </table>
+</div>
+
+
+<script src="assets/js/jquery-3.5.1.min.js"></script>
+<script>
+
+    //Get Data
+    $('#btnGetData').click(function () {
+        $.ajax({
+            url: "http://localhost:8080/api/v1/user",
+            type: "GET",
+            success: function (resp) {
+                let data = resp.data;
+                if (resp.code === 200) {
+                    $('#tableBody').empty();
+                    for (let i in data) {
+                        let row = `
+                        <tr>
+                            <td>${data[i].id}</td>
+                            <td>${data[i].name}</td>
+                            <td>${data[i].address}</td>
+                         </tr>
+                       `;
+                        $('#tableBody').append(row);
+                    }
+                }
+            }
+        });
+    });
+
+    //Save Data
+    $('#btnSave').click(function () {
+        let formDataObj = {
+            id: Number($('#userId').val()),
+            name: $('#userName').val(),
+            address: $('#userAddress').val()
+        };
+        //let dt = $('#formDa').serialize();
+        $.ajax({
+            url: "http://localhost:8080/api/v1/user",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(formDataObj),
+           // data: dt, remove contentType
+            success: function (resp) {
+                if (resp.code === 200) {
+                    alert(resp.message);
+                }
+            },
+            error: function (err) {
+                console.log("Error : ", err);
+            }
+        });
+    });
+</script>
+</body>
+</html>

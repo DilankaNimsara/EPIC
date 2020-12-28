@@ -5,13 +5,17 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.Collection;
+import java.util.List;
 
-public interface ProductRepository extends JpaRepository<product,Integer> {
+public interface ProductRepository extends JpaRepository<product, Integer> {
 
     product findByName(String name);
 
     @Query("select p from product p where p.price >= 3500 and p.name = :name")
     Collection<product> findAllActiveProducts(String name);
+
+    //    List<product> findAllActiveProductsByDepartmentID(int id);
+    List<product> findByDepartmentName(int id);
 
 
 }

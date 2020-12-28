@@ -5,6 +5,7 @@ import com.dilanka_a.springbootmysql.repositary.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -49,6 +50,12 @@ public class ProductService {
 
     public Collection<product> getProductNameSAME(String name) {
         return repository.findAllActiveProducts(name);
+    }
+
+    public List<product> getAllProductswithDep(int id){
+        List<product> products = new ArrayList<>();
+        repository.findByDepartmentName(id).forEach(products::add);
+        return products;
     }
 
 }

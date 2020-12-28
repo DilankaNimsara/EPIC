@@ -54,5 +54,10 @@ public class ProductController {
         return productService.getProductNameSAME(name);
     }
 
+    @RequestMapping("/getproductswithDepartment/{id}/")
+    public List<product> getproductswithDepartment(@PathVariable int id){
+            return productService.getAllProductswithDep(id);
+    }
+
 
 }
