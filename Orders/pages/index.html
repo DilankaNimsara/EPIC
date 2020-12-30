@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customers</title>
+</head>
+<body>
+<h1>Customer</h1>
+<form id="form">
+    <input type="text" id="cid" placeholder="ID"><br>
+    <input type="text" id="cname" placeholder="Name"><br>
+    <input type="text" id="caddress" placeholder="Address"><br>
+    <input type="button" id="btnsubmit" value="Submit">
+</form>
+
+<br>
+<br>
+<h1>Item</h1>
+<form>
+    <input type="text" id="iid" placeholder="ID"><br>
+    <input type="text" id="price" placeholder="price"><br/>
+    <input type="text" id="name" placeholder="name"><br/>
+    <input type="button" value="saveItem" id="btnsave">
+</form>
+<br/><br/>
+<input type="button" value="getData" id="btngetdata">
+<br/><br/>
+<table border="1">
+    <thead>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Address</th>
+    </thead>
+    <thead id="tbody"></thead>
+</table>
+
+<br><br>
+
+<input type="search" id="searchid" width="25%"><input type="button" value="Search" id="search">
+
+<div id="cdiv">
+
+</div>
+
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script>
+    $('#search').click(function () {
+        let id = $('#searchid').val()
+        $.ajax({
+            url: "http://localhost:9190//api/v1/customer/" + id,
+            method: "GET",
+            success: function (res) {
+                $('#cdiv').empty();
+                console.log(res)
+                let row =`<p> Customer id =  ${res.cid} </p>
+                          <p> Customer Name = ${res.name} </p>
+                          <p> Customer Address = ${res.address} </p>`
+                $('#cdiv').append(row)
+            }
+        })
+    })
+    $('#btnsubmit').click(function () {
+        let formdata = {
+            cid: Number($('#cid').val()),
+            name: $('#cname').val(),
+            address: $('#caddress').val()
+        }
+        $.ajax({
+            url: "http://localhost:9190//api/v1/customer",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(formdata),
+            success: function (res) {
+                console.log(res);
+            },
+            error: function (res) {
+                console.log(res);
+                console.log(formdata)
+            }
+        });
+    });
+
+    $('#btnsave').click(function () {
+        let itemobject = {
+            iid: Number($('#iid').val()),
+            name: $('#name').val(),
+            price: $('#price').val()
+        }
+        $.ajax({
+            url: "http://localhost:9190//api/v1/items",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(itemobject),
+            success: function (res) {
+                console.log(res)
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+    })
+
+    $('#btngetdata').click(function () {
+        $.ajax({
+            url: "http://localhost:9190//api/v1/customer",
+            method: "GET",
+            success: function (res) {
+                $('#tbody').empty();
+                let data = res
+                console.log(res)
+                for (let i in data) {
+                    let row = ` <tr>
+                        <td>${data[i].cid}</td>
+                        <td>${data[i].name}</td>
+                        <td>${data[i].address}</td>
+                    </tr>`;
+                    $('#tbody').append(row)
+                }
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+    })
+
+</script>
+
+</body>
+</html>

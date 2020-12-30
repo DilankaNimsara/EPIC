@@ -54,4 +54,12 @@ public class OrderImplement implements OrderService {
             orderRepo.save(modelMapper.map(ordersDto, Orders.class));
         }
     }
+
+    @Override
+    public List<OrdersDto> getOrderByCustomerID(int id) {
+        List<Orders> orders = orderRepo.findOrderByCustomerID(id);
+        System.out.println(orders);
+        return modelMapper.map(orders, new TypeToken<List<OrdersDto>>() {
+        }.getType());
+    }
 }

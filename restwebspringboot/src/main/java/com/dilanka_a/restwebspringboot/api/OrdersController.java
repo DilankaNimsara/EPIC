@@ -45,4 +45,9 @@ public class OrdersController {
         orderService.updateOrderById(ordersDto, id);
     }
 
+    @GetMapping("/customer/{id}")
+    List<OrdersDto> selectOrderByCustomerID(@PathVariable("id") int id) {
+        return orderService.getOrderByCustomerID(id);
+    }
+
 }

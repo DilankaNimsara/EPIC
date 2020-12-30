@@ -16,4 +16,6 @@ public interface OrderService {
 
     void updateOrderById(OrdersDto ordersDto,int id);
 
+    List<OrdersDto> getOrderByCustomerID(int id);
+
 }
