@@ -1,6 +1,7 @@
 package com.dilanka_a.restwebspringboot.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class OrdersDto {
 
@@ -8,13 +9,31 @@ public class OrdersDto {
     private Date date;
     private double amount;
     private CustomerDto customer;
+    private List<ItemsDto> items;
 
-    public OrdersDto(int oid, Date date, double amount, CustomerDto customer) {
+    public OrdersDto(int oid, Date date, double amount, CustomerDto customer, List<ItemsDto> items) {
         this.oid = oid;
         this.date = date;
         this.amount = amount;
         this.customer = customer;
+        this.items = items;
     }
+
+    public List<ItemsDto> getItems() {
+        return items;
+    }
+
+    public void setItems(List<ItemsDto> items) {
+        this.items = items;
+    }
+
+
+    //    public OrdersDto(int oid, Date date, double amount, CustomerDto customer) {
+//        this.oid = oid;
+//        this.date = date;
+//        this.amount = amount;
+//        this.customer = customer;
+//    }
 
     public OrdersDto() {
     }
@@ -57,7 +76,8 @@ public class OrdersDto {
                 "oid=" + oid +
                 ", date=" + date +
                 ", amount=" + amount +
-                ", customerDto=" + customer +
+                ", customer=" + customer +
+                ", items=" + items +
                 '}';
     }
 }

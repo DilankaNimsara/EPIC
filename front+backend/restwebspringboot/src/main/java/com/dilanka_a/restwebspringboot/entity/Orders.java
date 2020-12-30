@@ -16,6 +16,8 @@ public class Orders {
     @JoinColumn(name = "CustomerID", referencedColumnName = "cid", nullable = false)
     private Customer customer;
 
+
+
     public Orders(int oid, Date date, double amount, Customer customer) {
         this.oid = oid;
         this.date = date;

@@ -15,17 +15,6 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Orders> orders;
-//
-//    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-//    private List<Items> items;
-//
-//    public List<Items> getItems() {
-//        return items;
-//    }
-//
-//    public void setItems(List<Items> items) {
-//        this.items = items;
-//    }
 
     public Customer(int cid, String name, String address) {
         this.cid = cid;

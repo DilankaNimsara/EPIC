@@ -1,37 +1,47 @@
 package com.dilanka_a.restwebspringboot.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Orders {
     @Id
     private int oid;
+    @EmbeddedId
+    private OrderItem_PK pk;
     private Date date;
     private double amount;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "CustomerID", referencedColumnName = "cid", nullable = false)
     private Customer customer;
 
-    public Orders(int oid, Date date, double amount, Customer customer) {
+    @ManyToMany
+    @JoinTable(name = "order_item", joinColumns = {
+            @JoinColumn(name = "oid", referencedColumnName = "oid")
+    }, inverseJoinColumns = {
+            @JoinColumn(name = "iid", referencedColumnName = "iid")
+    })
+    private List<Items> items;
+
+    public Orders() {
+
+    }
+
+    public Orders(int oid, Date date, double amount, Customer customer, Items items) {
         this.oid = oid;
         this.date = date;
         this.amount = amount;
         this.customer = customer;
+        this.pk = new OrderItem_PK(items.getIid(), oid);
     }
 
-    public Orders() {
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
+    public Orders(int oid, Date date, double amount, Customer customer, List<Items> items) {
+        this.oid = oid;
+        this.date = date;
+        this.amount = amount;
         this.customer = customer;
+        this.items = items;
     }
 
     public int getOid() {
@@ -58,13 +68,19 @@ public class Orders {
         this.amount = amount;
     }
 
-    @Override
-    public String toString() {
-        return "Orders{" +
-                "oid=" + oid +
-                ", date=" + date +
-                ", amount=" + amount +
-                ", customer=" + customer +
-                '}';
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public List<Items> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Items> items) {
+        this.items = items;
     }
 }
