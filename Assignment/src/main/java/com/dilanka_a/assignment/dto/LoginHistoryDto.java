@@ -1,18 +1,21 @@
 package com.dilanka_a.assignment.dto;
 
 import com.dilanka_a.assignment.model.Users;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class LoginHistoryDto {
     private int lhid;
-    private Date time;
+    private Timestamp time;
+    @JsonIgnore
     private Users users;
 
     public LoginHistoryDto() {
     }
 
-    public LoginHistoryDto(int lhid, Date time, Users users) {
+    public LoginHistoryDto(int lhid, Timestamp time, Users users) {
         this.lhid = lhid;
         this.time = time;
         this.users = users;
@@ -26,11 +29,11 @@ public class LoginHistoryDto {
         this.lhid = lhid;
     }
 
-    public Date getTime() {
+    public Timestamp getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(Timestamp time) {
         this.time = time;
     }
 

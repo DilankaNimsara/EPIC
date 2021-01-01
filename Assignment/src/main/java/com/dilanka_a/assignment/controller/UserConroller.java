@@ -1,17 +1,20 @@
 package com.dilanka_a.assignment.controller;
 
 import com.dilanka_a.assignment.dto.UsersDto;
+import com.dilanka_a.assignment.response.stdResponses;
 import com.dilanka_a.assignment.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/users")
+@CrossOrigin
 public class UserConroller {
 
-    private UsersService usersService;
+    private final UsersService usersService;
 
     @Autowired
     public UserConroller(UsersService usersService) {
@@ -19,28 +22,33 @@ public class UserConroller {
     }
 
     @PostMapping
-    public void createUser(@RequestBody UsersDto usersDto) {
+    public ResponseEntity createUser(@RequestBody UsersDto usersDto) {
         usersService.createUser(usersDto);
+        return ResponseEntity.ok(new stdResponses(200, "success", null));
     }
 
-    @GetMapping("/get")
-    public List<UsersDto> getAllUsers() {
-        return usersService.getAllUsers();
+    @GetMapping
+    public ResponseEntity getAllUsers() {
+        List<UsersDto> allUsers = usersService.getAllUsers();
+        return ResponseEntity.ok(new stdResponses(200, "success", allUsers));
     }
 
     @GetMapping("/{id}")
-    public UsersDto getUsersByID(@PathVariable("id") int id) {
-        return usersService.getUserByID(id);
+    public ResponseEntity getUsersByID(@PathVariable("id") int id) {
+        UsersDto userByID = usersService.getUserByID(id);
+        return ResponseEntity.ok(new stdResponses(200, "success", userByID));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUserByIS(@PathVariable("id") int id) {
+    public ResponseEntity deleteUserByIS(@PathVariable("id") int id) {
         usersService.deleteUserbyID(id);
+        return ResponseEntity.ok(new stdResponses(200, "success", null));
     }
 
     @PutMapping("/{id}")
-    public void updateByUserID(@RequestBody UsersDto usersDto, int id) {
+    public ResponseEntity updateByUserID(@RequestBody UsersDto usersDto, @PathVariable("id") int id) {
         usersService.updateUser(usersDto, id);
+        return ResponseEntity.ok(new stdResponses(200, "success", null));
     }
 
 }

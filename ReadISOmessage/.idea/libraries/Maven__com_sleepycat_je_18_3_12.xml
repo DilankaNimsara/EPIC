@@ -3,7 +3,11 @@
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/com/sleepycat/je/18.3.12/je-18.3.12.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/sleepycat/je/18.3.12/je-18.3.12-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/sleepycat/je/18.3.12/je-18.3.12-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

@@ -1,5 +1,7 @@
 package com.dilanka_a.assignment.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -9,11 +11,13 @@ public class UserRole {
 
     @Id
     @Column(name = "urid")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int urid;
     @Column(name = "user_role")
     private String user_role;
 
     @OneToMany(mappedBy = "userRole", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Users> users;
 
     public UserRole() {

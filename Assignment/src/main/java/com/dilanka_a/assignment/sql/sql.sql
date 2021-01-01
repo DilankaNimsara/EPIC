@@ -20,8 +20,8 @@ CREATE TABLE users (
 
 
 CREATE TABLE loginhistory (
-    lhid int NOT NULL,
-    time Date ,
+    lhid int NOT NULL AUTO_INCREMENT,
+    time DATETIME ,
     userid int,
     PRIMARY KEY (lhid),
     FOREIGN KEY (userid) REFERENCES users(id)

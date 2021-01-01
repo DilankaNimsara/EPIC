@@ -9,6 +9,7 @@ public class Orders {
     private int oid;
     private Date date;
     private double amount;
+
     @ManyToOne
     @JoinColumn(name = "userID", referencedColumnName = "id", nullable = false)
     private User user;

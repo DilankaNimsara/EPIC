@@ -1,27 +1,28 @@
 package com.dilanka_a.assignment.model;
 
+
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "loginhistory")
 public class LoginHistory {
 
     @Id
-    @GeneratedValue
     @Column(name = "lhid")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int lhid;
     @Column(name = "time")
-    private Date time;
+    private Timestamp time;
 
     @ManyToOne
-    @JoinColumn(name = "userid", referencedColumnName = "id" , nullable = false)
+    @JoinColumn(name = "userid", referencedColumnName = "id", nullable = false)
     private Users users;
 
     public LoginHistory() {
     }
 
-    public LoginHistory(int lhid, Date time, Users users) {
+    public LoginHistory(int lhid, Timestamp time, Users users) {
         this.lhid = lhid;
         this.time = time;
         this.users = users;
@@ -35,11 +36,11 @@ public class LoginHistory {
         this.lhid = lhid;
     }
 
-    public Date getTime() {
+    public Timestamp getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(Timestamp time) {
         this.time = time;
     }
 

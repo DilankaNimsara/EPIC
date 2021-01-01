@@ -1,6 +1,11 @@
 package com.dilanka_a.assignment.model;
 
+
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Entity
@@ -9,6 +14,7 @@ public class Users {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "username")
     private String username;
@@ -31,6 +37,8 @@ public class Users {
         this.password = password;
         this.userRole = userRole;
     }
+
+
 
     public int getId() {
         return id;
