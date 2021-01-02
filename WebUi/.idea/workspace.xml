@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="80a98876-c1dc-4319-96be-372800a5929b" name="Default Changelist" comment="" />
+    <list default="true" id="80a98876-c1dc-4319-96be-372800a5929b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignment/src/main/java/com/dilanka_a/assignment/controller/UserConroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignment/src/main/java/com/dilanka_a/assignment/controller/UserConroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignment/src/main/java/com/dilanka_a/assignment/controller/UserRoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignment/src/main/java/com/dilanka_a/assignment/controller/UserRoleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignment/src/main/java/com/dilanka_a/assignment/dao/UsersDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignment/src/main/java/com/dilanka_a/assignment/dao/UsersDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignment/src/main/java/com/dilanka_a/assignment/service/UsersService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignment/src/main/java/com/dilanka_a/assignment/service/UsersService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignment/src/main/java/com/dilanka_a/assignment/service/implementations/UserImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignment/src/main/java/com/dilanka_a/assignment/service/implementations/UserImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AssignmentUI/js/jquery-3.5.1.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AssignmentUI/pages/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../AssignmentUI/pages/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,18 +24,25 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="1mGzCB7FiHp2gMghHekrW1H2eiV" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -37,10 +54,22 @@
       <option name="presentableId" value="Default" />
       <updated>1609134585993</updated>
       <workItem from="1609134588353" duration="3029000" />
+      <workItem from="1609575852456" duration="3360000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

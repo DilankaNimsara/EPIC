@@ -25,7 +25,13 @@ public class UserImplementation implements UsersService {
 
     @Override
     public void createUser(UsersDto usersDto) {
-        usersDao.save(modelMapper.map(usersDto, Users.class));
+        String name = usersDto.getUsername();
+        int count = getcountByUsername(name);
+        if (count > 0) {
+            System.out.println("Username already exits");
+        } else {
+            usersDao.save(modelMapper.map(usersDto, Users.class));
+        }
     }
 
     @Override
@@ -54,4 +60,25 @@ public class UserImplementation implements UsersService {
             usersDao.save(modelMapper.map(usersDto, Users.class));
         }
     }
+//
+//    @Override
+//    public UsersDto getUserByUsername(String username) {
+//        Users users = usersDao.getUserByUsername(username);
+//        return modelMapper.map(users, new TypeToken<UsersDto>() {
+//        }.getType());
+//    }
+
+    @Override
+    public int getcountByUsername(String username) {
+        return usersDao.getcountByUsername(username);
+    }
+
+    @Override
+    public UsersDto getUserByusernameAndPassword(String username, String password) {
+        Users users = usersDao.getUserByusernameAndPassword(username, password);
+        return modelMapper.map(users, new TypeToken<UsersDto>() {
+        }.getType());
+    }
+
+
 }

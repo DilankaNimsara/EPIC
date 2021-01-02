@@ -50,5 +50,16 @@ public class UserConroller {
         usersService.updateUser(usersDto, id);
         return ResponseEntity.ok(new stdResponses(200, "success", null));
     }
+//
+//    @GetMapping("/name/{username}")
+//    public UsersDto getUserbyname(@PathVariable("username") String username) {
+//       return usersService.getUserByUsername(username);
+//    }
+
+    @GetMapping("/{username}/{password}")
+    public ResponseEntity loginValidation(@PathVariable("username") String username, @PathVariable("password") String password) {
+        usersService.getUserByusernameAndPassword(username, password);
+        return ResponseEntity.ok(new stdResponses(200, "validated", username));
+    }
 
 }
