@@ -24,7 +24,7 @@ public class UserConroller {
     @PostMapping
     public ResponseEntity createUser(@RequestBody UsersDto usersDto) {
         usersService.createUser(usersDto);
-        return ResponseEntity.ok(new stdResponses(200, "success", null));
+        return ResponseEntity.ok(new stdResponses(200, "success", usersDto));
     }
 
     @GetMapping
@@ -58,8 +58,10 @@ public class UserConroller {
 
     @GetMapping("/{username}/{password}")
     public ResponseEntity loginValidation(@PathVariable("username") String username, @PathVariable("password") String password) {
-        usersService.getUserByusernameAndPassword(username, password);
-        return ResponseEntity.ok(new stdResponses(200, "validated", username));
+
+        UsersDto usersDto = usersService.getUserByusernameAndPassword(username, password);
+
+        return ResponseEntity.ok(new stdResponses(200, "validated", usersDto.getId()));
     }
 
 }

@@ -56,13 +56,33 @@
     $('#btnlogin').click(function () {
         let username = $('#username').val();
         let password = $('#password').val();
+
         $.ajax({
             url: "http://localhost:9090//api/v1/users/" + username + "/" + password,
             method: "GET",
             success: function (res) {
                 if (res.responseCode = 200) {
-                    window.location.href = "home.html"
-                    Session["SessionName"] = res.message;
+                    console.log(res.data)
+                    let user = {
+                        id: res.data
+                    }
+                    let object = {
+                        time: new Date(),
+                        users: user
+                    }
+                    $.ajax({
+                        url: "http://localhost:9090//api/v1/login_history",
+                        method: "POST",
+                        contentType: "application/json",
+                        data: JSON.stringify(object),
+                        success: function (res) {
+                            window.location.href = "home.html"
+                        },
+                        error: function (err) {
+                            console.log(err)
+                        }
+                    })
+
                 } else {
                     window.location.href = "index.html"
                 }

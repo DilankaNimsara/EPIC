@@ -25,7 +25,7 @@ public class Users {
     @JoinColumn(name = "userrole",referencedColumnName = "urid",nullable = false)
     private UserRole userRole;
 
-    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     private List<LoginHistory> loginHistories;
 
     public Users() {

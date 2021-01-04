@@ -3,7 +3,6 @@ package com.dilanka_a.assignment.service.implementations;
 import com.dilanka_a.assignment.dao.LoginHistoryDao;
 import com.dilanka_a.assignment.dto.LoginHistoryDto;
 import com.dilanka_a.assignment.model.LoginHistory;
-import com.dilanka_a.assignment.model.Users;
 import com.dilanka_a.assignment.service.LoginHistoryService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -26,7 +25,6 @@ public class LoginHistoryImpl implements LoginHistoryService {
 
     @Override
     public void insertLoginHistory(LoginHistoryDto loginHistoryDto) {
-        System.out.println(loginHistoryDto);
         loginHistoryDao.save(modelMapper.map(loginHistoryDto, LoginHistory.class));
     }
 

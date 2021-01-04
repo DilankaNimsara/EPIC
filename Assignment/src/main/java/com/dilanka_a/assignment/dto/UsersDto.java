@@ -10,6 +10,7 @@ public class UsersDto {
     private int id;
     private String username;
     private String password;
+    @JsonIgnore
     private UserRole userRole;
     @JsonIgnore
     private List<LoginHistory> loginHistories;
