@@ -196,7 +196,7 @@
                 let data = res.data;
                 if (res.responseCode == 200) {
                     for (i in data) {
-                        let option = `<option id="user_role" value="1"  >${data[i].user_role}</option>`;
+                        let option = `<option value='${data[i].urid}'  >${data[i].user_role}</option>`;
                         $('#role').append(option)
                     }
                 }
