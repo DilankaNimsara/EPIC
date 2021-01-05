@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +39,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Password</label>
-                    <input type="text" class="form-control" id="password" placeholder="Enter password">
+                    <input type="password" class="form-control" id="password" placeholder="Enter password">
                 </div>
                 <div class="mb-3 text-center">
                     <input type="button" class="btn btn-outline-primary " style="width: 150px;" value="Login"
@@ -61,14 +64,13 @@
             method: "GET",
             success: function (res) {
                 if (res.responseCode = 200) {
-                    window.location.href = "home.html"
-                    Session["SessionName"] = res.message;
+                    window.location.href = "home.php"
                 } else {
-                    window.location.href = "index.html"
+                    window.location.href = "index.php"
                 }
             },
             error: function (err) {
-                window.location.href = "index.html"
+                window.location.href = "index.php"
             }
         })
     })
@@ -81,5 +83,3 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
         integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
         crossorigin="anonymous"></script>
-</body>
-</html>
