@@ -53,6 +53,7 @@ public class UserConroller {
 
     @GetMapping("/{username}/{password}")
     public ResponseEntity loginValidation(@PathVariable("username") String username, @PathVariable("password") String password) {
+
         UsersDto usersDto = usersService.getUserByusernameAndPassword(username, password);
         return ResponseEntity.ok(new stdResponses(200, "validated", usersDto.getId()));
     }

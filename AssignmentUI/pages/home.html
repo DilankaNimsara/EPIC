@@ -173,6 +173,21 @@
         }
     })
 
+    function deletefunc(id) {
+        $.ajax({
+            url: "http://localhost:9090//api/v1/user_role/" + id,
+            method: "DELETE",
+            success: function (res) {
+                console.log(res)
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+        alert("A role deleted")
+        location.href="home.html"
+    }
+
     $(document).ready(function () {
         $.ajax({
             url: "http://localhost:9090//api/v1/user_role",
@@ -183,21 +198,10 @@
                     for (i in data) {
                         let row = `<tr>
                             <td>${data[i].user_role}</td>
-                            <td id='${data[i].urid}'><input type="button" value="Delete" id="delete" class="btn btn-outline-danger"></td>
+                            <td><input type="button" value="Delete" onclick = "deletefunc(${data[i].urid})" class="btn btn-outline-danger"></td>
                          </tr>`;
                         $('#tbodyuserrole').append(row)
-                        $('#delete').click(function () {
-                            $.ajax({
-                                url: "http://localhost:9090//api/v1/user_role/" + 1,
-                                method: "DELETE",
-                                success: function (res) {
-                                    console.log(res)
-                                },
-                                error: function (err) {
-                                    console.log(err)
-                                }
-                            })
-                        })
+
                     }
                 }
             },

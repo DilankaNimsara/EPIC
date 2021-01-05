@@ -122,6 +122,21 @@
     $('#logged_name').append("Logged as : " + username + " ")
 
 
+    function myfunction(id) {
+        $.ajax({
+            url: "http://localhost:9090//api/v1/users/delete/" + id,
+            method: "DELETE",
+            success: function (res) {
+                console.log(res)
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+        alert("User account deleted");
+        location.href="users.html"
+    }
+
     $(document).ready(function () {
         $.ajax({
             url: "http://localhost:9090//api/v1/users",
@@ -135,24 +150,10 @@
                             <td>${data[i].username}</td>
                             <td>${data[i].userRole.user_role}</td>
                             <td><input type="button" id="btnUpdate" class="btn btn-outline-success" value="Update"></td>
-                            <td><input type="button" id="btnDelete" class="btn btn-outline-danger" value="Delete"></td>
+                            <td><input onclick = "myfunction(${data[i].id})"  type="button"  class="btn btn-outline-danger" value="Delete"></td>
 
                          </tr>`;
 
-                        $('#btnDelete').click(function () {
-
-                            $.ajax({
-                                url: "http://localhost:9090//api/v1/users/delete/" + data[i].id,
-                                method: "DELETE",
-                                success: function (res) {
-                                    console.log(res)
-                                },
-                                error: function (err) {
-                                    console.log(err)
-
-                                }
-                            })
-                        })
 
                         $('#tbody').append(row)
 
