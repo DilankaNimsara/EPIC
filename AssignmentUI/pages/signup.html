@@ -34,16 +34,19 @@
                 <div class="mb-3">
                     <label class="form-label justify-content-center " style="">Username</label>
                     <input type="text" class="form-control" id="username" placeholder="Enter username">
+                    <p style="color: red" id="erruname"></p>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Password</label>
                     <input type="password" class="form-control" id="password" placeholder="Enter password">
+                    <p style="color: red" id="errpass"></p>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">User Role</label>
                     <select class="form-control" id="role">
                         <option class="text-muted">Select a role</option>
                     </select>
+                    <p style="color: red" id="errrole"></p>
                 </div>
                 <div class="mb-3 text-center">
                     <input type="button" class="btn btn-outline-primary " style="width: 150px;" value="Sign up"
@@ -68,7 +71,7 @@
                 let data = res.data;
                 if (res.responseCode == 200) {
                     for (i in data) {
-                        let option = `<option id="user_role" value="1"  >${data[i].user_role}</option>`;
+                        let option = `<option  value='${data[i].urid}'  >${data[i].user_role}</option>`;
                         $('#role').append(option)
                     }
                 }
@@ -79,39 +82,57 @@
         })
     })
 
+
     $('#btnsignup').click(function () {
 
-        let userrole = {
-            urid: $('#role').val()
-        }
-        let object = {
-            username: $('#username').val(),
-            password: $('#password').val(),
-            userRole: userrole
-        }
+        if ($('#username').val() != "" && $('#password').val() != "" && $('#role').val() != "") {
 
-
-        console.log($('#role').val())
-        $.ajax({
-            url: "http://localhost:9090//api/v1/users",
-            method: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(object),
-            success: function (res) {
-                console.log(res)
-                if (res.responseCode == 200) {
-                    alert("Your Account has been created.")
-                    window.location.href = "index.html";
-                }
-            },
-            error: function (err) {
-                console.log(err)
+            let userrole = {
+                urid: $('#role').val()
             }
-        })
+            let object = {
+                username: $('#username').val(),
+                password: $('#password').val(),
+                userRole: userrole
+            }
 
-
+            console.log($('#role').val())
+            $.ajax({
+                url: "http://localhost:9090//api/v1/users",
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(object),
+                success: function (res) {
+                    console.log(res)
+                    if (res.responseCode == 200) {
+                        alert("Your Account has been created.")
+                        window.location.href = "index.html";
+                    }
+                },
+                error: function (err) {
+                    console.log(err)
+                }
+            })
+        }
+        if ($('#username').val() == "") {
+            $('#erruname').empty()
+            $('#erruname').append("username filed cannot be null")
+        } else {
+            $('#erruname').empty()
+        }
+        if ($('#password').val() == "") {
+            $('#errpass').empty()
+            $('#errpass').append("password filed cannot be null")
+        } else {
+            $('#errpass').empty()
+        }
+        if ($('#user_role').val() == "") {
+            $('#errrole').empty()
+            $('#errrole').append("user role filed cannot be null")
+        } else {
+            $('#errrole').empty()
+        }
     })
-
 </script>
 
 

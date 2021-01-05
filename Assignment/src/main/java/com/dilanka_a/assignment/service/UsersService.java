@@ -16,8 +16,6 @@ public interface UsersService {
 
     void updateUser(UsersDto usersDto, int id);
 
-//    UsersDto getUserByUsername(String username);
-
     int getcountByUsername(String uername);
 
     UsersDto getUserByusernameAndPassword(String username, String password);

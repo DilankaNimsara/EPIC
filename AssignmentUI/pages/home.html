@@ -5,7 +5,7 @@
     <title>Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <script src="../js/jquery-3.5.1.min.js"></script>
+    <script src="getcookie.js"></script>
 </head>
 <body style="background-color: seashell">
 
@@ -15,7 +15,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0"/>
             <li>
                 <a href="#" class="btn btn-outline-info" type="submit" style="width: 100px;">
-                    Home
+                    Dashboard
                 </a>
             </li>
             <li>
@@ -23,9 +23,16 @@
                     Users
                 </a>
             </li>
+            <li>
+                <a href="profile.html" class="btn btn-outline-info" type="submit" style="width: 100px;">
+                    Profile
+                </a>
+            </li>
             </ul>
+
             <form class="d-flex">
-                <a href="#" class="btn btn-outline-light" type="submit" style="width: 100px;">
+                <span id="logged_name" style="color:#abf4ff; padding-right: 10px; padding-top: 5px"></span>
+                <a href="logout.html" class="btn btn-outline-light" type="submit" style="width: 100px;">
                     log out
                 </a>
             </form>
@@ -38,7 +45,7 @@
         <div class="container" style="margin-left:auto; margin-top: 10%; width: 100%; background: transparent;">
             <div class="card ">
                 <div class="card-header bg-primary text-light text-center">
-                    Login History
+                    All Users Login History
                 </div>
                 <div class="card-body">
                     <table class="table table-striped">
@@ -46,7 +53,7 @@
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Date and time</th>
-                            <th scope="col">User ID</th>
+                            <th scope="col">Username</th>
                         </tr>
                         </thead>
                         <tbody id="tbody">
@@ -93,7 +100,7 @@
                             <thead>
                             <tr>
                                 <th scope="col">User Role</th>
-                                <th scope="col">#</th>
+                                <th scope="col">Delete</th>
                             </tr>
                             </thead>
                             <tbody id="tbodyuserrole">
@@ -109,7 +116,11 @@
 </div>
 
 
+<script src="../js/jquery-3.5.1.min.js"></script>
 <script>
+
+    var username = getCookie("username");
+    $('#logged_name').append("Logged as : " + username + " ")
 
     $(document).ready(function () {
         $.ajax({
@@ -171,13 +182,13 @@
                 if (res.responseCode == 200) {
                     for (i in data) {
                         let row = `<tr>
-                            <td id="value">${data[i].user_role}</td>
-                            <td><input type="button" value="Delete" id="delete" class="btn btn-outline-danger"></td>
+                            <td>${data[i].user_role}</td>
+                            <td id='${data[i].urid}'><input type="button" value="Delete" id="delete" class="btn btn-outline-danger"></td>
                          </tr>`;
                         $('#tbodyuserrole').append(row)
                         $('#delete').click(function () {
                             $.ajax({
-                                url: "http://localhost:9090//api/v1/user_role/" + $('#value').val(),
+                                url: "http://localhost:9090//api/v1/user_role/" + 1,
                                 method: "DELETE",
                                 success: function (res) {
                                     console.log(res)

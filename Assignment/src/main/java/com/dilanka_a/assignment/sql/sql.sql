@@ -13,7 +13,7 @@ CREATE TABLE users (
     id int NOT NULL AUTO_INCREMENT,
     username varchar(20) NOT NULL,
     password varchar(20) NOT NULL,
-    userrole int,
+    userrole int NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (userrole) REFERENCES userrole(urid)
 );

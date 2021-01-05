@@ -10,13 +10,13 @@ public class UsersDto {
     private int id;
     private String username;
     private String password;
-    @JsonIgnore
     private UserRole userRole;
     @JsonIgnore
     private List<LoginHistory> loginHistories;
 
     public UsersDto() {
     }
+
 
     public UsersDto(int id, String username, String password, UserRole userRole) {
         this.id = id;

@@ -43,6 +43,7 @@ public class UserRole {
         this.user_role = user_role;
     }
 
+    @JsonIgnore
     public List<Users> getUsers() {
         return users;
     }

@@ -39,6 +39,7 @@ public class UserImplementation implements UsersService {
     @Override
     public List<UsersDto> getAllUsers() {
         List<Users> all = usersDao.findAll();
+
         return modelMapper.map(all, new TypeToken<List<UsersDto>>() {
         }.getType());
     }

@@ -1,11 +1,9 @@
 package com.dilanka_a.assignment.model;
 
 
-import com.sun.istack.NotNull;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Entity
@@ -16,13 +14,15 @@ public class Users {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column(name = "username")
     private String username;
+
     @Column(name = "password")
     private String password;
 
     @ManyToOne
-    @JoinColumn(name = "userrole",referencedColumnName = "urid",nullable = false)
+    @JoinColumn(name = "userrole", referencedColumnName = "urid", nullable = false)
     private UserRole userRole;
 
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
@@ -31,13 +31,13 @@ public class Users {
     public Users() {
     }
 
+
     public Users(int id, String username, String password, UserRole userRole) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.userRole = userRole;
     }
-
 
 
     public int getId() {
@@ -56,6 +56,7 @@ public class Users {
         this.username = username;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
@@ -72,6 +73,7 @@ public class Users {
         this.userRole = userRole;
     }
 
+    @JsonIgnore
     public List<LoginHistory> getLoginHistories() {
         return loginHistories;
     }

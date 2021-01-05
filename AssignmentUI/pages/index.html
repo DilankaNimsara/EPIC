@@ -33,10 +33,12 @@
                 <div class="mb-3">
                     <label class="form-label justify-content-center " style="">Username</label>
                     <input type="text" class="form-control" id="username" placeholder="Enter username">
+                    <p style="color: red" id="erruname"></p>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Password</label>
                     <input type="text" class="form-control" id="password" placeholder="Enter password">
+                    <p style="color: red" id="errpass"></p>
                 </div>
                 <div class="mb-3 text-center">
                     <input type="button" class="btn btn-outline-primary " style="width: 150px;" value="Login"
@@ -57,40 +59,59 @@
         let username = $('#username').val();
         let password = $('#password').val();
 
-        $.ajax({
-            url: "http://localhost:9090//api/v1/users/" + username + "/" + password,
-            method: "GET",
-            success: function (res) {
-                if (res.responseCode = 200) {
-                    console.log(res.data)
-                    let user = {
-                        id: res.data
-                    }
-                    let object = {
-                        time: new Date(),
-                        users: user
-                    }
-                    $.ajax({
-                        url: "http://localhost:9090//api/v1/login_history",
-                        method: "POST",
-                        contentType: "application/json",
-                        data: JSON.stringify(object),
-                        success: function (res) {
-                            window.location.href = "home.html"
-                        },
-                        error: function (err) {
-                            console.log(err)
-                        }
-                    })
+        if (username != "" && password != "") {
 
-                } else {
-                    window.location.href = "index.html"
+            $.ajax({
+                url: "http://localhost:9090//api/v1/users/" + username + "/" + password,
+                method: "GET",
+                success: function (res) {
+                    console.log(res.responseCode)
+                    if (res.responseCode = 200) {
+                        console.log(res.data)
+                        let user = {
+                            id: res.data
+                        }
+                        let object = {
+                            time: new Date(),
+                            users: user
+                        }
+                        $.ajax({
+                            url: "http://localhost:9090//api/v1/login_history",
+                            method: "POST",
+                            contentType: "application/json",
+                            data: JSON.stringify(object),
+                            success: function (res) {
+                                document.cookie = "username=" + username + "; path=/";
+                                window.location.href = "home.html"
+                            },
+                            error: function (err) {
+                                console.log(err)
+                            }
+                        })
+
+                    } else {
+                        window.location.href = "index.html"
+                    }
+                },
+                error: function (err) {
+                    console.log(err)
+                    alert("Your username or password invalid")
+
                 }
-            },
-            error: function (err) {
-                window.location.href = "index.html"
-            }
-        })
+            })
+        }
+        if (username == "") {
+            $('#erruname').empty()
+            $('#erruname').append("username filed cannot be null")
+        } else {
+            $('#erruname').empty()
+        }
+        if (password == "") {
+            $('#errpass').empty()
+            $('#errpass').append("password filed cannot be null")
+        } else {
+            $('#errpass').empty()
+        }
     })
 
 
