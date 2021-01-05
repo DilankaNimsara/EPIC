@@ -23,6 +23,7 @@ public class UserConroller {
 
     @PostMapping
     public ResponseEntity createUser(@RequestBody UsersDto usersDto) {
+        System.out.println(usersDto);
         usersService.createUser(usersDto);
         return ResponseEntity.ok(new stdResponses(200, "success", usersDto));
     }
