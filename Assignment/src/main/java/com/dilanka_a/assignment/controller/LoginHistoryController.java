@@ -28,9 +28,15 @@ public class LoginHistoryController {
         return ResponseEntity.ok(new stdResponses(200, "success", null));
     }
 
-    @GetMapping
-    public ResponseEntity selectLoginHistories() {
-        List<LoginHistoryDto> loginHistories = loginHistoryService.getLoginHistories();
+    @GetMapping("/id/{id}")
+    public ResponseEntity selectLoginHistories(@PathVariable("id") int id) {
+        List<LoginHistoryDto> loginHistories = loginHistoryService.getLoginHistoriesbyID(id);
+        return ResponseEntity.ok(new stdResponses(200, "success", loginHistories));
+    }
+
+    @GetMapping("/{username}")
+    public ResponseEntity selectLoginHistories(@PathVariable("username") String username) {
+        List<LoginHistoryDto> loginHistories = loginHistoryService.getLoginHistories(username);
         return ResponseEntity.ok(new stdResponses(200, "success", loginHistories));
     }
 

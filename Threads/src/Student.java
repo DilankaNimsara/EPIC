@@ -1,4 +1,5 @@
 public class Student extends Thread {
+
     Printer printer;
 
     public Student(Printer printer) {
@@ -7,10 +8,6 @@ public class Student extends Thread {
 
     @Override
     public void run() {
-        try {
-            printer.print();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        printer.print();
     }
 }

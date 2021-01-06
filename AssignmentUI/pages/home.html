@@ -45,7 +45,7 @@
         <div class="container" style="margin-left:auto; margin-top: 10%; width: 100%; background: transparent;">
             <div class="card ">
                 <div class="card-header bg-primary text-light text-center">
-                    All Users Login History
+                    Login History
                 </div>
                 <div class="card-body">
                     <table class="table table-striped">
@@ -124,7 +124,7 @@
 
     $(document).ready(function () {
         $.ajax({
-            url: "http://localhost:9090//api/v1/login_history",
+            url: "http://localhost:9090//api/v1/login_history/" + username,
             method: "GET",
             success: function (res) {
                 let data = res.data;
@@ -185,7 +185,7 @@
             }
         })
         alert("A role deleted")
-        location.href="home.html"
+        location.href = "home.html"
     }
 
     $(document).ready(function () {

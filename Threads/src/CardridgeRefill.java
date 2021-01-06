@@ -1,12 +1,20 @@
-public class CardridgeRefill extends Thread{
+public class CardridgeRefill extends Thread {
+
+    Printer printer;
+
+    public CardridgeRefill(Printer printer) {
+        this.printer = printer;
+    }
 
     @Override
     public void run() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        while (true) {
+                fillCartridges();
         }
-        System.out.println("Cardridge refill....");
     }
+
+    public void fillCartridges() {
+        printer.cartridgeRefilling();
+    }
+
 }

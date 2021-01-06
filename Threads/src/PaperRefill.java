@@ -1,11 +1,20 @@
-public class PaperRefill extends Thread{
+public class PaperRefill extends Thread {
+
+    Printer printer;
+
+    public PaperRefill(Printer printer) {
+        this.printer = printer;
+    }
+
     @Override
     public void run() {
-        System.out.println("Paper Refill....");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        while (true) {
+            fillPapers();
         }
     }
+
+    public void fillPapers() {
+        printer.papersRefilling();
+    }
+
 }

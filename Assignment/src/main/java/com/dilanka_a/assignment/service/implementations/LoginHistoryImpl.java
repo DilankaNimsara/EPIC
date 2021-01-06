@@ -29,14 +29,18 @@ public class LoginHistoryImpl implements LoginHistoryService {
     }
 
     @Override
-    public List<LoginHistoryDto> getLoginHistories() {
-        List<LoginHistory> loginHistories = loginHistoryDao.findAll();
+    public List<LoginHistoryDto> getLoginHistories(String username) {
+        List<LoginHistory> loginHistories = loginHistoryDao.findAllusername(username);
         return modelMapper.map(loginHistories, new TypeToken<List<LoginHistoryDto>>() {
         }.getType());
     }
 
-    @Override
-    public void deleteLoginHistory(int id) {
-//        loginHistoryDao.deleteAllbyID(id);
-    }
+
+
+//    @Override
+//    public List<LoginHistoryDto> getLoginHistoriesbyID(int id) {
+//        List<LoginHistory> loginHistories = loginHistoryDao.findAllById();
+//        return modelMapper.map(loginHistories, new TypeToken<List<LoginHistoryDto>>() {
+//        }.getType());
+//    }
 }
