@@ -45,15 +45,13 @@
         <div class="container" style="margin-left:auto; margin-top: 10%; width: 100%; background: transparent;">
             <div class="card ">
                 <div class="card-header bg-primary text-light text-center">
-                    Login History
+                    Login History - <span id="user_loged"></span>
                 </div>
                 <div class="card-body">
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th scope="col">ID</th>
                             <th scope="col">Date and time</th>
-                            <th scope="col">Username</th>
                         </tr>
                         </thead>
                         <tbody id="tbody">
@@ -121,6 +119,7 @@
 
     var username = getCookie("username");
     $('#logged_name').append("Logged as : " + username + " ")
+    $('#user_loged').append(username)
 
     $(document).ready(function () {
         $.ajax({
@@ -131,9 +130,7 @@
                 if (res.responseCode == 200) {
                     for (i in data) {
                         let row = `<tr>
-                            <td>${data[i].lhid}</td>
                             <td>${new Date(data[i].time)}</td>
-                            <td>${data[i].users.username}</td>
                          </tr>`;
                         $('#tbody').append(row)
                     }
@@ -159,7 +156,7 @@
                 success: function (res) {
                     if (res.responseCode == 200) {
                         alert("User role added")
-                        document.getElementById('user_role').value = '';
+                        location.href = "home.html"
                     }
                 },
                 error: function (err) {

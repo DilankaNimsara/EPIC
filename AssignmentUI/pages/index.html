@@ -82,6 +82,7 @@
                             data: JSON.stringify(object),
                             success: function (res) {
                                 document.cookie = "username=" + username + "; path=/";
+
                                 window.location.href = "home.html"
                             },
                             error: function (err) {

@@ -5,7 +5,6 @@
     <title>Users</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <script src="getcookie.js"></script>
 </head>
 <body style="background-color: seashell">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -112,6 +111,50 @@
     </div>
 </div>
 
+<div id="myModel" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="title" class="modal-title"></h5>
+                <button type="button" onclick="closeModal();" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <tbody id="tbodyloghistory">
+                    </tbody>
+                </table>
+            </div>
+            <!--            <div class="modal-footer">-->
+            <!--                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+            <!--                <button type="button" class="btn btn-primary">Save changes</button>-->
+            <!--            </div>-->
+        </div>
+    </div>
+</div>
+
+
+<div id="updatemodal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userTitle"></h5>
+                <button type="button" onclick="closeModal();" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="updateForm">
+
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-primary " style="width: 150px;" value="Update"
+                       id="btnupdateUsers">
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="../js/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
         integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU"
@@ -119,8 +162,93 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
         integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
         crossorigin="anonymous"></script>
+<script src="getcookie.js"></script>
 <script>
 
+    function openModel(id) {
+        $('#myModel').modal('show');
+        viewHistory(id);
+    }
+
+    function openUpdateModal(id) {
+        $('#updatemodal').modal('show');
+
+        $.ajax({
+            url: "http://localhost:9090//api/v1/users/" + id,
+            method: "GET",
+            success: function (res) {
+                $('#updateForm').empty()
+                $('#userTitle').empty()
+                $('#userTitle').append("User - " + res.data.username)
+
+                let UN_toupate = res.data.username;
+                let UP_toupdate = res.data.password;
+
+
+                $.ajax({
+                    url: "http://localhost:9090//api/v1/user_role",
+                    method: "GET",
+                    success: function (response) {
+                        let data = response.data;
+                        if (response.responseCode == 200) {
+                            for (i in data) {
+                                if (res.data.userRole.urid == data[i].urid) {
+                                    let option = `<option value='${data[i].urid}' selected >${data[i].user_role}</option>`;
+                                    $('#roletoupdate').append(option)
+                                } else {
+                                    let option = `<option value='${data[i].urid}'  >${data[i].user_role}</option>`;
+                                    $('#roletoupdate').append(option)
+                                }
+                            }
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err)
+                    }
+                })
+                let form = `
+                    <div class="mb-3">
+                        <label class="form-label justify-content-center " style="">Username</label>
+                        <input type="text" class="form-control" id="usernametoupdate" value='${UN_toupate}''>
+                        <p style="color: red" id="errunameupdate"></p>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label justify-content-center " style="">Password</label>
+                            <input type="password" class="form-control" id="passwordtoupdate " value='${UP_toupdate}'>
+                            <p style="color: red" id="errunameupdate"></p>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">User Role</label>
+                            <select class="form-control" id="roletoupdate">
+                            </select>
+                            <p style="color: red" id="errroleupdate"></p>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label justify-content-center " style="">Conform Password</label>
+                            <input type="password" class="form-control" id="confirmpasswordtoupdate ">
+                             <p style="color: red" id="errconfirmpassword"></p>
+                        </div>
+                             <p style="color: red" id = "common_err"></p>           `
+
+                $('#updateForm').append(form);
+            }
+        })
+    }
+
+    $('#btnupdateUsers').click(function () {
+        let password_Update = $('#passwordtoupdate').val();
+        let password_Update_confirm = $('#confirmpasswordtoupdate').val();
+        let username_update = $('#usernametoupdate').val();
+        let role_update = $('#roletoupdate').val();
+
+        console.log(password_Update)
+
+    })
+
+    function closeModal() {
+        $('#myModel').modal('hide');
+        $('#updatemodal').modal('hide');
+    }
 
     $('#loginnewuser').click(function () {
         window.location.href = "logout.html"
@@ -151,10 +279,19 @@
             url: "http://localhost:9090//api/v1/login_history/id/" + id,
             method: "GET",
             success: function (res) {
+                console.log(res)
                 let data = res.data;
                 if (res.responseCode == 200) {
                     for (i in data) {
-                        console.log(data[i].urid)
+                        $('#title').empty();
+                        $('#title').append("Login History : " + `<b>${data[i].users.username} </b> -->
+                        <input style="float: right;" type="button" class="btn btn-primary btn-sm" value="Generate Report">`
+                        );
+                        $('#tbodyloghistory').append(
+                            `<tr>
+                                <td>${new Date(data[i].time)}</td>
+                            </tr>`
+                        )
                     }
                 }
             },
@@ -177,10 +314,9 @@
                             <td>${data[i].id}</td>
                             <td>${data[i].username}</td>
                             <td>${data[i].userRole.user_role}</td>
-                            <td><input onclick = " viewHistory(${data[i].id})" type="button"  class="btn btn-outline-info" value="View"></td>
-                            <td><input type="button" class="btn btn-outline-success" data-toggle="modal" value="Update"></td>
+                            <td><button onclick="openModel(${data[i].id})"  class="btn btn-outline-info" type="button">View</button></td>
+                            <td><button onclick="openUpdateModal(${data[i].id})"  class="btn btn-outline-success" type="button">Update</button></td>
                             <td><input onclick = " myfunction(${data[i].id})"  type="button"  class="btn btn-outline-danger" value="Delete"></td>
-
                          </tr>`;
                         $('#tbody').append(row)
                     }
@@ -191,6 +327,10 @@
             }
         })
     })
+
+    function updateUserAccount(id) {
+
+    }
 
 
     $(document).ready(function () {
@@ -235,6 +375,7 @@
                     console.log(res)
                     if (res.responseCode == 200) {
                         alert("Your Account has been created.")
+                        location.href = "users.html"
                     }
                 },
                 error: function (err) {

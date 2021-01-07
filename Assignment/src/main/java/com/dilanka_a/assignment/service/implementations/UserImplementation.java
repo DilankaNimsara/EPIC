@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserImplementation implements UsersService {
@@ -23,16 +24,14 @@ public class UserImplementation implements UsersService {
         this.modelMapper = modelMapper;
     }
 
-    @Override
-    public void createUser(UsersDto usersDto) {
-        String name = usersDto.getUsername();
-        int count = getcountByUsername(name);
-        if (count > 0) {
-            System.out.println("Username already exits");
-//            usersDao.getUserByUsername(modelMapper.map(usersDto, new TypeToken<UsersDto>() {
-//            }.getType()));
-        } else {
+    @Override //already exists 0 success 1
+    public int createUser(UsersDto usersDto) {
+        Optional<Users> user = usersDao.findByUsername(usersDto.getUsername());
+        if (user.isPresent()){
+            return 0;
+        }else {
             usersDao.save(modelMapper.map(usersDto, Users.class));
+            return 1;
         }
     }
 

@@ -104,7 +104,10 @@
                 data: JSON.stringify(object),
                 success: function (res) {
                     console.log(res)
-                    if (res.responseCode == 200) {
+                    if (res.responseCode == 0) {
+                        alert("username already exits");
+                        return;
+                    } else {
                         alert("Your Account has been created.")
                         window.location.href = "index.html";
                     }
