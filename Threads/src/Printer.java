@@ -1,65 +1,91 @@
-public class Printer implements Runnable {
+public class Printer extends Thread {
 
-    public static int paperCount = 250;
-    public static int cartridgeCount = 50;
-    private final int maxPrintingCount = 250;
-    private int printedPaperCount = 0;
 
-    public synchronized void cartridgeRefilling() {
-        if (Printer.cartridgeCount == 0) {
-            System.out.println("cartridgeRefilling");
-            Printer.cartridgeCount = 50;
-        }
-        notifyAll();
+    public static volatile boolean isAllocated = false;
+    public static volatile int printedPaperCount = 0;
+    public static volatile int printedCartridgeCount = 0;
+    public int MAX_TRAY_PAPER_COUNT = 250;
+    public int MAX_INK_CART_COUNT = 50;
+    public int paperCount = 250;
+    public volatile boolean isPaperIsFulled = false;
+    public volatile boolean isCartridgeIsFulled = false;
+
+    public Printer() {
+        new PaperRefill(this).start();
+        new CartridgeRefill(this).start();
     }
 
-    public synchronized void papersRefilling() {
-        if (printedPaperCount % maxPrintingCount == 0) {
-//            try {
-//                Thread.sleep(100);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            System.out.println("papersRefilling");
-//            for (int i = 1; i <= 4; i++) {
-//                Printer.paperCount += 50;
-//            }
-        }
-        notifyAll();
-    }
-
-    @Override
-    public void run() {
-    }
-
-    public synchronized void print() {
-        for (int i = 1; i <= maxPrintingCount; i++) {
+    public void cartridgeRefilling() {
+        synchronized (this) {
+            printedCartridgeCount = 0;
             try {
-                Thread.sleep(50);
+                System.out.println("Cartridge Refilled.!");
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println(i + " Document printed.");
-            printedPaperCount++;
-            paperCount--;
 
-            if (i % 10 == 0) {
-                cartridgeCount--;
+            isCartridgeIsFulled = true;
+            this.notify();
+        }
+    }
+
+    public void papersRefilling() {
+        synchronized (this) {
+            printedPaperCount = 0;
+            try {
+                System.out.println("Papers Refilled.!");
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-            if (cartridgeCount == 0) {
-                try {
-                    this.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+            isPaperIsFulled = true;
+            this.notify();
+        }
+    }
+
+
+    public void print() {
+        synchronized (this) {
+            for (int i = 1; i <= paperCount; i++) {
+                System.out.println(Thread.currentThread().getName() + " : " + i + " Document printed.");
+                printedPaperCount++;
+                if (i % 10 == 0) {
+                    ++printedCartridgeCount;
                 }
-            }
-//            if (i % maxPrintingCount == 0) {
+                while (printedCartridgeCount == MAX_INK_CART_COUNT || printedPaperCount == MAX_TRAY_PAPER_COUNT) {
+                    if (printedCartridgeCount == MAX_INK_CART_COUNT) {
+                        try {
+                            isCartridgeIsFulled = false;
+                            this.notifyAll();
+                            this.wait();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+//                    System.out.println(printedCartridgeCount + " =----------------------=");
+                    if (printedPaperCount == MAX_TRAY_PAPER_COUNT) {
+                        //System.out.println("***********************************************************");
+                        try {
+                            isPaperIsFulled = false;
+                            this.notifyAll();
+                            this.wait();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
 //                try {
-//                    this.wait();
+//                    Thread.sleep(100);
 //                } catch (InterruptedException e) {
 //                    e.printStackTrace();
 //                }
-//            }
+//                System.out.println(printedPaperCount + " =---------****************--------------=");
+            }
+            if (isPaperIsFulled || isCartridgeIsFulled) {
+                isAllocated = false;
+            }
         }
     }
+
 }

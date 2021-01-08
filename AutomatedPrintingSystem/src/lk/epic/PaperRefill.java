@@ -1,6 +1,8 @@
+package lk.epic;
+
 public class PaperRefill extends Thread {
-    int refillCount = 0;
-    Printer printer;
+
+    private Printer printer;
 
     public PaperRefill(Printer printer) {
         this.printer = printer;
@@ -9,10 +11,8 @@ public class PaperRefill extends Thread {
     @Override
     public void run() {
         while (true) {
-
-            if (printer.printedPaperCount == printer.MAX_TRAY_PAPER_COUNT) {
-
-                printer.papersRefilling();
+            if (printer.printedPapers == printer.paperCount) {
+                printer.paperRefill();
             }
         }
     }

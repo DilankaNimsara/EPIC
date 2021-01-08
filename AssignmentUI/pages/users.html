@@ -139,7 +139,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="userTitle"></h5>
+                <h5 class="modal-title" id="userTitle" onclose=""></h5>
                 <button type="button" onclick="closeModal();" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -179,7 +179,7 @@
             success: function (res) {
                 $('#updateForm').empty()
                 $('#userTitle').empty()
-                $('#userTitle').append("User - " + res.data.username)
+                $('#userTitle').append("User - [" + res.data.username + "]")
 
                 let UN_toupate = res.data.username;
                 let UP_toupdate = res.data.password;
@@ -274,23 +274,33 @@
     }
 
     function viewHistory(id) {
-        console.log(id)
+        $('#tbodyloghistory').empty()
         $.ajax({
             url: "http://localhost:9090//api/v1/login_history/id/" + id,
             method: "GET",
             success: function (res) {
-                console.log(res)
                 let data = res.data;
+                let x = 0;
                 if (res.responseCode == 200) {
                     for (i in data) {
+                        x++;
                         $('#title').empty();
-                        $('#title').append("Login History : " + `<b>${data[i].users.username} </b> -->
+                        $('#title').append("Login History : " + `<b>${data[i].users.username} </b> --:
                         <input style="float: right;" type="button" class="btn btn-primary btn-sm" value="Generate Report">`
                         );
                         $('#tbodyloghistory').append(
                             `<tr>
                                 <td>${new Date(data[i].time)}</td>
                             </tr>`
+                        )
+
+                    }
+
+                    if (x == 0) {
+                        $('#tbodyloghistory').append(
+                            `<tr>
+                            <td>No data found</td>
+                        </tr>`
                         )
                     }
                 }
