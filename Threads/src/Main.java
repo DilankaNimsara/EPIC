@@ -1,14 +1,9 @@
 public class Main {
     public static void main(String[] args) {
 
+
         Printer printer = new Printer();
-
-        Thread cartridgeRefill = new Thread((new CardridgeRefill(printer)));
-        cartridgeRefill.start();
-
-        Thread PaperRefill = new Thread(new PaperRefill(printer));
-        PaperRefill.start();
-
+        printer.start();
 
         Thread student1 = new Student(printer);
         student1.setName("student 1");
@@ -22,7 +17,13 @@ public class Main {
         student3.setName("student 3");
         student3.start();
 
+        Thread student4 = new Student(printer);
+        student4.setName("student 4");
+        student4.start();
 
+        Thread student5 = new Student(printer);
+        student5.setName("student 5");
+        student5.start();
 
     }
 }

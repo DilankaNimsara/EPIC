@@ -35,6 +35,12 @@ public class LoginHistoryImpl implements LoginHistoryService {
         }.getType());
     }
 
+    @Override
+    public List<LoginHistoryDto> getLoginHistoriesbyID(int id) {
+        List<LoginHistory> loginHistories = loginHistoryDao.findAllByuserId(id);
+        return modelMapper.map(loginHistories, new TypeToken<List<LoginHistoryDto>>() {
+        }.getType());
+    }
 
 
 //    @Override

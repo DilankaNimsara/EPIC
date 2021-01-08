@@ -10,4 +10,5 @@ public interface LoginHistoryService {
 
     List<LoginHistoryDto> getLoginHistories(String username);
 
+    List<LoginHistoryDto> getLoginHistoriesbyID(int id);
 }
