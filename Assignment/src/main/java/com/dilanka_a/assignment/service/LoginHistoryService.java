@@ -8,8 +8,6 @@ public interface LoginHistoryService {
 
     void insertLoginHistory(LoginHistoryDto loginHistoryDto);
 
-    List<LoginHistoryDto> getLoginHistories();
-
-    void deleteLoginHistory(int id);
+    List<LoginHistoryDto> getLoginHistories(String username);
 
 }

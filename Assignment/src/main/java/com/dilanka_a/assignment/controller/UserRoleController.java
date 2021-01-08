@@ -34,10 +34,10 @@ public class UserRoleController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUserroles(@PathVariable("id") int id) {
+    public ResponseEntity deleteUserroles(@PathVariable("id") int id) {
         userRoleService.deleteUserRole(id);
+        return ResponseEntity.ok(new stdResponses(200, "success", null));
     }
-
 
 
 }

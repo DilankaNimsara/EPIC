@@ -3,7 +3,6 @@ package com.dilanka_a.assignment.service.implementations;
 import com.dilanka_a.assignment.dao.LoginHistoryDao;
 import com.dilanka_a.assignment.dto.LoginHistoryDto;
 import com.dilanka_a.assignment.model.LoginHistory;
-import com.dilanka_a.assignment.model.Users;
 import com.dilanka_a.assignment.service.LoginHistoryService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -26,19 +25,22 @@ public class LoginHistoryImpl implements LoginHistoryService {
 
     @Override
     public void insertLoginHistory(LoginHistoryDto loginHistoryDto) {
-        System.out.println(loginHistoryDto);
         loginHistoryDao.save(modelMapper.map(loginHistoryDto, LoginHistory.class));
     }
 
     @Override
-    public List<LoginHistoryDto> getLoginHistories() {
-        List<LoginHistory> loginHistories = loginHistoryDao.findAll();
+    public List<LoginHistoryDto> getLoginHistories(String username) {
+        List<LoginHistory> loginHistories = loginHistoryDao.findAllusername(username);
         return modelMapper.map(loginHistories, new TypeToken<List<LoginHistoryDto>>() {
         }.getType());
     }
 
-    @Override
-    public void deleteLoginHistory(int id) {
-//        loginHistoryDao.deleteAllbyID(id);
-    }
+
+
+//    @Override
+//    public List<LoginHistoryDto> getLoginHistoriesbyID(int id) {
+//        List<LoginHistory> loginHistories = loginHistoryDao.findAllById();
+//        return modelMapper.map(loginHistories, new TypeToken<List<LoginHistoryDto>>() {
+//        }.getType());
+//    }
 }

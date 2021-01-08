@@ -10,6 +10,7 @@ public class advice {
 
     @ExceptionHandler(value = {RuntimeException.class})
     public ResponseEntity handle(RuntimeException e) {
+
         return new ResponseEntity(new stdResponses(400, "Error", e.getMessage()), HttpStatus.BAD_REQUEST);
     }
 

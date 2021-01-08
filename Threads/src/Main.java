@@ -3,21 +3,25 @@ public class Main {
 
         Printer printer = new Printer();
 
-        Thread std1 = new Thread(new Student(printer));
-        std1.setName("student one ");
-        std1.start();
-        Thread std2 = new Thread(new Student(printer));
-        std2.setName("student two ");
-        std2.start();
-        Thread std3 = new Thread(new Student(printer));
-        std3.setName("student three ");
-        std3.start();
-        Thread std4 = new Thread(new Student(printer));
-        std4.setName("student four ");
-        std4.start();
-        Thread std5 = new Thread(new Student(printer));
-        std5.setName("student five ");
-        std5.start();
+        Thread cartridgeRefill = new Thread((new CardridgeRefill(printer)));
+        cartridgeRefill.start();
+
+        Thread PaperRefill = new Thread(new PaperRefill(printer));
+        PaperRefill.start();
+
+
+        Thread student1 = new Student(printer);
+        student1.setName("student 1");
+        student1.start();
+
+        Thread student2 = new Student(printer);
+        student2.setName("student 2");
+        student2.start();
+
+        Thread student3 = new Student(printer);
+        student3.setName("student 3");
+        student3.start();
+
 
 
     }

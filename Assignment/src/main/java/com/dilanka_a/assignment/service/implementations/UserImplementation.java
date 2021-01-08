@@ -29,6 +29,8 @@ public class UserImplementation implements UsersService {
         int count = getcountByUsername(name);
         if (count > 0) {
             System.out.println("Username already exits");
+//            usersDao.getUserByUsername(modelMapper.map(usersDto, new TypeToken<UsersDto>() {
+//            }.getType()));
         } else {
             usersDao.save(modelMapper.map(usersDto, Users.class));
         }
@@ -37,6 +39,7 @@ public class UserImplementation implements UsersService {
     @Override
     public List<UsersDto> getAllUsers() {
         List<Users> all = usersDao.findAll();
+
         return modelMapper.map(all, new TypeToken<List<UsersDto>>() {
         }.getType());
     }

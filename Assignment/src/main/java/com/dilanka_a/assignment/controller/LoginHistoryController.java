@@ -1,8 +1,10 @@
 package com.dilanka_a.assignment.controller;
 
 import com.dilanka_a.assignment.dto.LoginHistoryDto;
+import com.dilanka_a.assignment.response.stdResponses;
 import com.dilanka_a.assignment.service.LoginHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,14 +22,22 @@ public class LoginHistoryController {
     }
 
     @PostMapping
-    public void insertLoginHistory(@RequestBody LoginHistoryDto loginHistoryDto) {
+    public ResponseEntity insertLoginHistory(@RequestBody LoginHistoryDto loginHistoryDto) {
         System.out.println(loginHistoryDto);
         loginHistoryService.insertLoginHistory(loginHistoryDto);
+        return ResponseEntity.ok(new stdResponses(200, "success", null));
     }
 
-    @GetMapping
-    public List<LoginHistoryDto> selectLoginHistories() {
-        return loginHistoryService.getLoginHistories();
+    @GetMapping("/id/{id}")
+    public ResponseEntity selectLoginHistories(@PathVariable("id") int id) {
+        List<LoginHistoryDto> loginHistories = loginHistoryService.getLoginHistoriesbyID(id);
+        return ResponseEntity.ok(new stdResponses(200, "success", loginHistories));
+    }
+
+    @GetMapping("/{username}")
+    public ResponseEntity selectLoginHistories(@PathVariable("username") String username) {
+        List<LoginHistoryDto> loginHistories = loginHistoryService.getLoginHistories(username);
+        return ResponseEntity.ok(new stdResponses(200, "success", loginHistories));
     }
 
 

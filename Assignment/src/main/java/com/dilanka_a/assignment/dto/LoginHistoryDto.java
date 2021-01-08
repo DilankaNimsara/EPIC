@@ -4,13 +4,13 @@ import com.dilanka_a.assignment.model.Users;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.sql.Timestamp;
-import java.util.Date;
+
 
 public class LoginHistoryDto {
     private int lhid;
     private Timestamp time;
-    @JsonIgnore
-    private Users users;
+
+    private Users  users;
 
     public LoginHistoryDto() {
     }

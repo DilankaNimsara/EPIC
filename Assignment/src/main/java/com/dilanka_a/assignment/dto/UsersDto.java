@@ -17,6 +17,7 @@ public class UsersDto {
     public UsersDto() {
     }
 
+
     public UsersDto(int id, String username, String password, UserRole userRole) {
         this.id = id;
         this.username = username;

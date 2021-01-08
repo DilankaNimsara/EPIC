@@ -23,8 +23,9 @@ public class UserConroller {
 
     @PostMapping
     public ResponseEntity createUser(@RequestBody UsersDto usersDto) {
+        System.out.println(usersDto);
         usersService.createUser(usersDto);
-        return ResponseEntity.ok(new stdResponses(200, "success", null));
+        return ResponseEntity.ok(new stdResponses(200, "success", usersDto));
     }
 
     @GetMapping
@@ -39,7 +40,7 @@ public class UserConroller {
         return ResponseEntity.ok(new stdResponses(200, "success", userByID));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity deleteUserByIS(@PathVariable("id") int id) {
         usersService.deleteUserbyID(id);
         return ResponseEntity.ok(new stdResponses(200, "success", null));
@@ -50,16 +51,12 @@ public class UserConroller {
         usersService.updateUser(usersDto, id);
         return ResponseEntity.ok(new stdResponses(200, "success", null));
     }
-//
-//    @GetMapping("/name/{username}")
-//    public UsersDto getUserbyname(@PathVariable("username") String username) {
-//       return usersService.getUserByUsername(username);
-//    }
 
     @GetMapping("/{username}/{password}")
     public ResponseEntity loginValidation(@PathVariable("username") String username, @PathVariable("password") String password) {
-        usersService.getUserByusernameAndPassword(username, password);
-        return ResponseEntity.ok(new stdResponses(200, "validated", username));
+
+        UsersDto usersDto = usersService.getUserByusernameAndPassword(username, password);
+        return ResponseEntity.ok(new stdResponses(200, "validated", usersDto.getId()));
     }
 
 }
