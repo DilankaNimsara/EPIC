@@ -1,7 +1,19 @@
+/**
+ *
+ *Open login history view modal
+ * @param id
+ */
+
 function openModel(id) {
     $('#myModel').modal('show');
     viewHistory(id);
 }
+
+
+/**
+ * Update user account details
+ * @param id
+ */
 
 function openUpdateModal(id) {
     $('#updatemodal').modal('show');
@@ -70,6 +82,12 @@ function openUpdateModal(id) {
     })
 }
 
+/**
+ *
+ * update button
+ *
+ */
+
 $('#btnupdateUsers').click(function () {
     let role = $('#roletoupdate').val()
     let username = $('#usernametoupdate').val()
@@ -133,19 +151,36 @@ $('#btnupdateUsers').click(function () {
 
 })
 
+/**
+ * close modals
+ */
+
 function closeModal() {
     $('#myModel').modal('hide');
     $('#updatemodal').modal('hide');
 }
 
+/**
+ * logout
+ */
 $('#loginnewuser').click(function () {
     window.location.href = "logout.html"
 })
 
+/**
+ *
+ * set username to coockie variable
+ * @type {string|string}
+ */
 var username = getCookie("username");
 $('#logged_name').append("Logged as : " + username + " ")
 
 
+/**
+ *
+ * delete function
+ * @param id
+ */
 function myfunction(id) {
     $.ajax({
         url: "http://localhost:9090//api/v1/users/delete/" + id,
@@ -161,6 +196,10 @@ function myfunction(id) {
     location.href = "users.html"
 }
 
+/**
+ * get login history details from the database
+ * @param id
+ */
 function viewHistory(id) {
     $('#tbodyloghistory').empty()
     $.ajax({
@@ -197,8 +236,12 @@ function viewHistory(id) {
             console.log(err)
         }
     })
-
 }
+
+/**
+ *
+ * fetch and fill the table from the user details
+ */
 
 $(document).ready(function () {
     $.ajax({
@@ -230,7 +273,11 @@ function updateUserAccount(id) {
 
 }
 
-
+/**
+ *
+ * get values to dropdown menu
+ *
+ */
 $(document).ready(function () {
     $.ajax({
         url: "http://localhost:9090//api/v1/user_role",
@@ -249,6 +296,11 @@ $(document).ready(function () {
         }
     })
 })
+
+/**
+ *
+ * create new user
+ */
 
 $('#btncreatNewUser').click(function () {
 

@@ -25,6 +25,11 @@ $('#btnlogin').click(function () {
                         time: new Date(),
                         users: user
                     }
+                    /**
+                     *
+                     * get login history from the database
+                     *
+                     */
                     $.ajax({
                         url: "http://localhost:9090//api/v1/login_history",
                         method: "POST",

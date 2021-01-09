@@ -6,6 +6,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ *
+ * @author dilanka_a
+ */
+
+
 @Entity
 @Table(name = "users")
 public class Users {

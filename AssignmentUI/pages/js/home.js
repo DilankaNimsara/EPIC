@@ -1,7 +1,15 @@
+/**
+ * set username to cookie variable
+ * @type {string|string}
+ */
 var username = getCookie("username");
 $('#logged_name').append("Logged as : " + username + " ")
 $('#user_loged').append(username)
 
+
+/**
+ * fetch login history of one user
+ */
 $(document).ready(function () {
     $.ajax({
         url: "http://localhost:9090//api/v1/login_history/" + username,
@@ -23,6 +31,10 @@ $(document).ready(function () {
     })
 })
 
+/**
+ *
+ * add new role
+ */
 $('#btnadd').click(function () {
     let object = {
         user_role: $('#user_role').val()
@@ -51,6 +63,10 @@ $('#btnadd').click(function () {
     }
 })
 
+/**
+ * delete role
+ * @param id
+ */
 function deletefunc(id) {
     $.ajax({
         url: "http://localhost:9090//api/v1/user_role/" + id,
@@ -66,6 +82,9 @@ function deletefunc(id) {
     location.href = "home.html"
 }
 
+/**
+ * get login history of currently logged user
+ */
 $(document).ready(function () {
     $.ajax({
         url: "http://localhost:9090//api/v1/user_role",

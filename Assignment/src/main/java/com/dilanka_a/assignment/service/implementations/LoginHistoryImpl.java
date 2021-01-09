@@ -11,6 +11,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author dilanka_a
+ */
+
+
 @Service
 public class LoginHistoryImpl implements LoginHistoryService {
 
@@ -23,11 +28,22 @@ public class LoginHistoryImpl implements LoginHistoryService {
         this.loginHistoryDao = loginHistoryDao;
     }
 
+    /**
+     * insert login history to database
+     *
+     * @param loginHistoryDto
+     */
     @Override
     public void insertLoginHistory(LoginHistoryDto loginHistoryDto) {
         loginHistoryDao.save(modelMapper.map(loginHistoryDto, LoginHistory.class));
     }
 
+    /**
+     * get login histories
+     *
+     * @param username
+     * @return login history dto list
+     */
     @Override
     public List<LoginHistoryDto> getLoginHistories(String username) {
         List<LoginHistory> loginHistories = loginHistoryDao.findAllusername(username);
@@ -35,6 +51,12 @@ public class LoginHistoryImpl implements LoginHistoryService {
         }.getType());
     }
 
+    /**
+     * get login history by id
+     *
+     * @param id
+     * @return login history dto list
+     */
     @Override
     public List<LoginHistoryDto> getLoginHistoriesbyID(int id) {
         List<LoginHistory> loginHistories = loginHistoryDao.findAllByuserId(id);
@@ -43,10 +65,4 @@ public class LoginHistoryImpl implements LoginHistoryService {
     }
 
 
-//    @Override
-//    public List<LoginHistoryDto> getLoginHistoriesbyID(int id) {
-//        List<LoginHistory> loginHistories = loginHistoryDao.findAllById();
-//        return modelMapper.map(loginHistories, new TypeToken<List<LoginHistoryDto>>() {
-//        }.getType());
-//    }
 }

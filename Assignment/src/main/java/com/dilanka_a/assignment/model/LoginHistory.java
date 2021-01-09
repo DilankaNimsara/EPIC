@@ -4,6 +4,12 @@ package com.dilanka_a.assignment.model;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
+/**
+ *
+ * @author dilanka_a
+ */
+
+
 @Entity
 @Table(name = "loginhistory")
 public class LoginHistory {

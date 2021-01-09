@@ -1,9 +1,14 @@
+
 package com.dilanka_a.assignment.dto;
 
 import com.dilanka_a.assignment.model.Users;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.sql.Timestamp;
+/**
+ *
+ * @author dilanka_a
+ */
 
 
 public class LoginHistoryDto {

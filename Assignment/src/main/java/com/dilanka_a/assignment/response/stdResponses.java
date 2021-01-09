@@ -1,5 +1,10 @@
 package com.dilanka_a.assignment.response;
 
+/**
+ *
+ * @author dilanka_a
+ */
+
 public class stdResponses {
 
     private int responseCode;

@@ -4,6 +4,10 @@ import com.dilanka_a.assignment.model.Users;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
+/**
+ *
+ * @author dilanka_a
+ */
 
 public class UserRoleDto {
 

@@ -6,6 +6,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
 
+/**
+ *
+ * @author dilanka_a
+ */
+
 public class UsersDto {
     private int id;
     private String username;
