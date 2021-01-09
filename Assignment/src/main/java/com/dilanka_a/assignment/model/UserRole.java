@@ -6,7 +6,6 @@ import javax.persistence.*;
 import java.util.List;
 
 /**
- *
  * @author dilanka_a
  */
 
@@ -22,7 +21,7 @@ public class UserRole {
     @Column(name = "user_role")
     private String user_role;
 
-    @OneToMany(mappedBy = "userRole", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "userRole", cascade = {CascadeType.PERSIST})
     private List<Users> users;
 
     public UserRole() {

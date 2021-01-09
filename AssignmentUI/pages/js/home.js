@@ -73,13 +73,14 @@ function deletefunc(id) {
         method: "DELETE",
         success: function (res) {
             console.log(res)
+            alert("A role deleted")
+            location.href = "home.html"
         },
         error: function (err) {
-            console.log(err)
+            alert("You cant delete this role. It is already using..")
         }
     })
-    alert("A role deleted")
-    location.href = "home.html"
+
 }
 
 /**

@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.util.List;
 
 /**
- *
  * @author dilanka_a
  */
 
@@ -31,7 +30,7 @@ public class Users {
     @JoinColumn(name = "userrole", referencedColumnName = "urid", nullable = false)
     private UserRole userRole;
 
-    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "users", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<LoginHistory> loginHistories;
 
     public Users() {
