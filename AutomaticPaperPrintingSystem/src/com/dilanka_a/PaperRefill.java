@@ -1,3 +1,5 @@
+package com.dilanka_a;
+
 public class PaperRefill extends Thread {
     int refillCount = 0;
     Printer printer;
