@@ -11,7 +11,7 @@ public class CartridgeRefill implements Runnable {
     @Override
     public void run() {
         while (true) {
-            if (Printer.USED_CARTRIDGE_COUNT == printer.MAX_CARTRIDGE_SIZE) {
+            if (printer.USED_CARTRIDGE_COUNT == printer.MAX_CARTRIDGE_SIZE) {
                 printer.cartridgeRefill();
             }
         }

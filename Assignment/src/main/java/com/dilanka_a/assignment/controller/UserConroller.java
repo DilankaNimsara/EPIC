@@ -40,7 +40,9 @@ public class UserConroller {
         int user = usersService.createUser(usersDto);
         if (user == 0) {
             return ResponseEntity.ok(new stdResponses(0, "already exits", null));
-        } else {
+        } else if(user == 2){
+            return ResponseEntity.ok(new stdResponses(2, "password length", null));
+        }else {
             return ResponseEntity.ok(new stdResponses(200, "success", usersDto));
         }
 

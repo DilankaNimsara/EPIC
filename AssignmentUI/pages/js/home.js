@@ -6,6 +6,14 @@ var username = getCookie("username");
 $('#logged_name').append("Logged as : " + username + " ")
 $('#user_loged').append(username)
 
+/***
+ * login validation
+ */
+$(document).ready(function () {
+    if (username == "") {
+        window.location.href = "logout.html"
+    }
+})
 
 /**
  * fetch login history of one user

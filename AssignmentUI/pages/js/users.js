@@ -24,7 +24,7 @@ function openUpdateModal(id) {
         success: function (res) {
             $('#updateForm').empty()
             $('#userTitle').empty()
-            $('#userTitle').append("User - [" + res.data.username + "]")
+            $('#userTitle').append("User - <b>[" + res.data.username + "]</b>")
 
             let UN_toupate = res.data.username;
             let UP_toupdate = res.data.password;
@@ -175,6 +175,15 @@ $('#loginnewuser').click(function () {
 var username = getCookie("username");
 $('#logged_name').append("Logged as : " + username + " ")
 
+/**
+ * login validation
+ */
+$(document).ready(function () {
+    if (username == "") {
+        window.location.href = "logout.html"
+    }
+})
+
 
 /**
  *
@@ -212,8 +221,7 @@ function viewHistory(id) {
                 for (i in data) {
                     x++;
                     $('#title').empty();
-                    $('#title').append("Login History : " + `<b>${data[i].users.username} </b> --:
-                        <input style="float: right;" type="button" class="btn btn-primary btn-sm" value="Generate Report">`
+                    $('#title').append("Login History : " + `<b>[${data[i].users.username}] </b> `
                     );
                     $('#tbodyloghistory').append(
                         `<tr>
@@ -323,9 +331,13 @@ $('#btncreatNewUser').click(function () {
             data: JSON.stringify(object),
             success: function (res) {
                 console.log(res)
-                if (res.responseCode == 200) {
+                if (res.responseCode == 0) {
+                    alert("username already exits");
+                } else if (res.responseCode == 2) {
+                    alert("Password should have more than 6 characters")
+                } else {
                     alert("Your Account has been created.")
-                    location.href = "users.html"
+                    window.location.href = "index.html";
                 }
             },
             error: function (err) {

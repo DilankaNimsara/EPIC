@@ -11,7 +11,7 @@ public class PaperRefill implements Runnable {
     public void run() {
 
         while (true) {
-            if (Printer.USED_PAPER_COUNT == printer.MAX_PAPER_TRAY_SIZE) {
+            if (printer.USED_PAPER_COUNT == printer.MAX_PAPER_TRAY_SIZE) {
                 printer.paperRefill();
             }
         }

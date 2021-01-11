@@ -38,11 +38,17 @@ public class UserImplementation implements UsersService {
     @Override
     public int createUser(UsersDto usersDto) {
         Optional<Users> user = usersDao.findByUsername(usersDto.getUsername());
+        int passwordLength = usersDto.getPassword().length();
+
         if (user.isPresent()) {
             return 0;
         } else {
-            usersDao.save(modelMapper.map(usersDto, Users.class));
-            return 1;
+            if (6 <= passwordLength && passwordLength <= 10) {
+                usersDao.save(modelMapper.map(usersDto, Users.class));
+                return 1;
+            } else {
+                return 2;
+            }
         }
     }
 

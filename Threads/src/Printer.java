@@ -63,9 +63,7 @@ public class Printer extends Thread {
                             e.printStackTrace();
                         }
                     }
-//                    System.out.println(printedCartridgeCount + " =----------------------=");
                     if (printedPaperCount == MAX_TRAY_PAPER_COUNT) {
-                        //System.out.println("***********************************************************");
                         try {
                             isPaperIsFulled = false;
                             this.notifyAll();
@@ -75,12 +73,6 @@ public class Printer extends Thread {
                         }
                     }
                 }
-//                try {
-//                    Thread.sleep(100);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//                System.out.println(printedPaperCount + " =---------****************--------------=");
             }
             if (isPaperIsFulled || isCartridgeIsFulled) {
                 isAllocated = false;
