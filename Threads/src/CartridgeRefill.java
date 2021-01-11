@@ -1,4 +1,3 @@
-
 public class CartridgeRefill extends Thread {
 
     Printer printer;

@@ -9,6 +9,7 @@ public class PaperRefill extends Thread {
     @Override
     public void run() {
         while (true) {
+
             if (printer.printedPaperCount == printer.MAX_TRAY_PAPER_COUNT) {
                 printer.papersRefilling();
             }
