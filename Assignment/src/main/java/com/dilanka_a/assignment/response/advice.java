@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  * @author dilanka_a
  */
 
-@RestControllerAdvice
+//@RestControllerAdvice
 public class advice {
 
     @ExceptionHandler(value = {RuntimeException.class})

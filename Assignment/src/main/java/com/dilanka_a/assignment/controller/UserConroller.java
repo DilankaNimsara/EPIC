@@ -40,9 +40,9 @@ public class UserConroller {
         int user = usersService.createUser(usersDto);
         if (user == 0) {
             return ResponseEntity.ok(new stdResponses(0, "already exits", null));
-        } else if(user == 2){
+        } else if (user == 2) {
             return ResponseEntity.ok(new stdResponses(2, "password length", null));
-        }else {
+        } else {
             return ResponseEntity.ok(new stdResponses(200, "success", usersDto));
         }
 
@@ -110,10 +110,19 @@ public class UserConroller {
      * @param password
      * @return
      */
+
     @GetMapping("/{username}/{password}")
     public ResponseEntity loginValidation(@PathVariable("username") String username, @PathVariable("password") String password) {
         UsersDto usersDto = usersService.getUserByusernameAndPassword(username, password);
         return ResponseEntity.ok(new stdResponses(200, "validated", usersDto.getId()));
     }
+
+    @GetMapping("/login")
+    public ResponseEntity loginValidationWithParam(@RequestParam(required = false) String username, @RequestParam(required = false) String password) {
+        System.out.println(username);
+        UsersDto usersDto = usersService.getUserByusernameAndPassword(username, password);
+        return ResponseEntity.ok(new stdResponses(200, "validated", null));
+    }
+
 
 }
