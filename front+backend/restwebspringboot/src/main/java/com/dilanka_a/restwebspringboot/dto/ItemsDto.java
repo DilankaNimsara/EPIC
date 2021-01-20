@@ -1,33 +1,25 @@
 package com.dilanka_a.restwebspringboot.dto;
 
+import com.dilanka_a.restwebspringboot.entity.Orders;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.List;
+
 public class ItemsDto {
     private int iid;
     private double price;
     private String name;
+    @JsonIgnore
+    private List<Orders> orders;
 
-//    private CustomerDto customer;
-//
-//    public ItemsDto(int iid, double price, String name, CustomerDto customer) {
-//        this.iid = iid;
-//        this.price = price;
-//        this.name = name;
-//        this.customer = customer;
-//    }
-//
-//    public CustomerDto getCustomer() {
-//        return customer;
-//    }
-//
-//    public void setCustomer(CustomerDto customer) {
-//        this.customer = customer;
-//    }
-    public ItemsDto(int iid, double price, String name) {
+    public ItemsDto() {
+    }
+
+    public ItemsDto(int iid, double price, String name, List<Orders> orders) {
         this.iid = iid;
         this.price = price;
         this.name = name;
-    }
-
-    public ItemsDto() {
+        this.orders = orders;
     }
 
     public int getIid() {
@@ -54,12 +46,21 @@ public class ItemsDto {
         this.name = name;
     }
 
+    public List<Orders> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Orders> orders) {
+        this.orders = orders;
+    }
+
     @Override
     public String toString() {
-        return "Items{" +
+        return "ItemsDto{" +
                 "iid=" + iid +
                 ", price=" + price +
                 ", name='" + name + '\'' +
+                ", orders=" + orders +
                 '}';
     }
 }

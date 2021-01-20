@@ -1,43 +1,27 @@
 package com.dilanka_a.restwebspringboot.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Items {
     @Id
+    @GeneratedValue
     private int iid;
     private double price;
     private String name;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "customerid", nullable = false, referencedColumnName = "cid")
-//    private Customer customer;
-//
-//    public Items(int iid, double price, String name, Customer customer) {
-//        this.iid = iid;
-//        this.price = price;
-//        this.name = name;
-//        this.customer = customer;
-//    }
-//
-//    public Customer getCustomer() {
-//        return customer;
-//    }
 
-//    public void setCustomer(Customer customer) {
-//        this.customer = customer;
-//    }
+    @ManyToMany(mappedBy = "items", cascade = CascadeType.ALL)
+    private List<Orders> orders;
 
-        public Items(int iid, double price, String name) {
+    public Items() {
+    }
+
+    public Items(int iid, double price, String name, List<Orders> orders) {
         this.iid = iid;
         this.price = price;
         this.name = name;
-    }
-
-    public Items() {
+        this.orders = orders;
     }
 
     public int getIid() {
@@ -64,12 +48,21 @@ public class Items {
         this.name = name;
     }
 
+    public List<Orders> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Orders> orders) {
+        this.orders = orders;
+    }
+
     @Override
     public String toString() {
         return "Items{" +
                 "iid=" + iid +
                 ", price=" + price +
                 ", name='" + name + '\'' +
+                ", orders=" + orders +
                 '}';
     }
 }

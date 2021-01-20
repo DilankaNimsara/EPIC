@@ -32,6 +32,7 @@ public class OrdersController {
 
     @GetMapping
     List<OrdersDto> getAllOrders() {
+        System.out.println(orderService.findAllOrders());
         return orderService.findAllOrders();
     }
 

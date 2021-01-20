@@ -1,31 +1,18 @@
 package com.dilanka_a.restwebspringboot.entity;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
 public class Customer {
     @Id
+    @GeneratedValue
     private int cid;
     private String name;
     private String address;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Orders> orders;
-//
-//    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-//    private List<Items> items;
-//
-//    public List<Items> getItems() {
-//        return items;
-//    }
-//
-//    public void setItems(List<Items> items) {
-//        this.items = items;
-//    }
 
     public Customer(int cid, String name, String address) {
         this.cid = cid;

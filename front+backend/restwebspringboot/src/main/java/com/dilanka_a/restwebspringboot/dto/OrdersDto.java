@@ -1,6 +1,9 @@
 package com.dilanka_a.restwebspringboot.dto;
 
+import com.dilanka_a.restwebspringboot.entity.Items;
+
 import java.util.Date;
+import java.util.List;
 
 public class OrdersDto {
 
@@ -8,23 +11,17 @@ public class OrdersDto {
     private Date date;
     private double amount;
     private CustomerDto customer;
-
-    public OrdersDto(int oid, Date date, double amount, CustomerDto customer) {
-        this.oid = oid;
-        this.date = date;
-        this.amount = amount;
-        this.customer = customer;
-    }
+    private List<Items> items;
 
     public OrdersDto() {
     }
 
-    public CustomerDto getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(CustomerDto customer) {
+    public OrdersDto(int oid, Date date, double amount, CustomerDto customer, List<Items> items) {
+        this.oid = oid;
+        this.date = date;
+        this.amount = amount;
         this.customer = customer;
+        this.items = items;
     }
 
     public int getOid() {
@@ -51,13 +48,21 @@ public class OrdersDto {
         this.amount = amount;
     }
 
-    @Override
-    public String toString() {
-        return "OrdersDto{" +
-                "oid=" + oid +
-                ", date=" + date +
-                ", amount=" + amount +
-                ", customerDto=" + customer +
-                '}';
+    public CustomerDto getCustomer() {
+        return customer;
     }
+
+    public void setCustomer(CustomerDto customer) {
+        this.customer = customer;
+    }
+
+    public List<Items> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Items> items) {
+        this.items = items;
+    }
+
+
 }
